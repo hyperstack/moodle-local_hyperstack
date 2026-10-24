@@ -75,7 +75,7 @@ $string['settings:apikey'] = 'API key';
 $string['settings:apikey_desc'] = 'In Hyperstack, open Settings → Developers and create an API key. It is stored encrypted.';
 $string['settings:apiurl'] = 'API address';
 $string['settings:apiurl_desc'] = 'Leave this as it is unless Hyperstack support asks you to change it.';
-$string['settings:intro'] = 'Issue Hyperstack certificates and badges when learners complete a course. A Hyperstack account is required: sign up at <a href="https://thehyperstack.com" target="_blank">thehyperstack.com</a>. After you save the API key, <a href="{$a}">test the connection</a>. Teachers then choose credential groups in each course under More → Hyperstack credentials. Course completion is calculated by cron, so cron must run.';
+$string['settings:intro'] = 'Issue Hyperstack certificates and badges when learners complete a course. A Hyperstack account is required; its free plan covers up to 20 recipients. After you save the API key, <a href="{$a}">test the connection</a>. Teachers then choose credential groups in each course under More → Hyperstack credentials. Course completion is calculated by cron, so cron must run.';
 $string['settings:open'] = 'Open the plugin settings.';
 $string['skip:unmapped'] = 'The credential group is no longer selected for this course.';
 $string['skip:userdeleted'] = 'The learner\'s account was deleted.';

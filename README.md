@@ -9,7 +9,7 @@ Issue [Hyperstack](https://thehyperstack.com) certificates and badges automatica
 
 Plugin name: `local_hyperstack`. Supports Moodle 4.5 to 5.3 (PHP 8.1 to 8.4).
 
-**A Hyperstack account is required.** [Sign up free](https://thehyperstack.com). Each credential uses Hyperstack credits as usual.
+**A Hyperstack account is required.** Hyperstack's free plan covers up to 20 recipients; larger volumes need a Hyperstack plan.
 
 ![Choosing a course's credential groups](docs/screenshots/4-course-groups.png)
 
@@ -64,7 +64,7 @@ To issue a credential, the plugin sends the learner's **full name** and **email 
 ## Support
 
 - Questions: [hello@thehyperstack.com](mailto:hello@thehyperstack.com)
-- Bugs and requests: [GitHub issues](https://github.com/hyperstack/moodle-hyperstack/issues)
+- Bugs and requests: [GitHub issues](https://github.com/hyperstack/moodle-local_hyperstack/issues)
 - Guide: [docs.thehyperstack.com](https://docs.thehyperstack.com/integrations/moodle-plugin)
 
 ## Development

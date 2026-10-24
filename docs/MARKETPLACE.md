@@ -7,10 +7,10 @@ Text and answers for marketplace.moodle.com → Submit a plugin → **Free**. No
 - **Plugin name:** Hyperstack Credentials
 - **Frankenstyle:** `local_hyperstack`
 - **Type:** Local plugin
-- **Zip:** `local_hyperstack_1.0.0.zip` (one folder `hyperstack/`), built with `git archive --format=zip --prefix=hyperstack/ -o local_hyperstack_1.0.0.zip v1.0.0`
+- **Zip:** `local_hyperstack.zip` (one folder `hyperstack/`), built with `git archive --format=zip --prefix=hyperstack/ -o local_hyperstack.zip v1.0.0`
 - **Moodle versions:** 4.5, 5.0, 5.1, 5.2, 5.3
-- **Source:** https://github.com/hyperstack/moodle-hyperstack
-- **Issues:** https://github.com/hyperstack/moodle-hyperstack/issues
+- **Source:** https://github.com/hyperstack/moodle-local_hyperstack
+- **Issues:** https://github.com/hyperstack/moodle-local_hyperstack/issues
 - **Documentation:** https://docs.thehyperstack.com/integrations/moodle-plugin
 - **Website:** https://thehyperstack.com
 - **Licence:** GNU GPL v3 or later
@@ -37,7 +37,7 @@ Hyperstack Credentials connects your Moodle site to Hyperstack, a platform for d
 
 **Requirements**
 
-- **A Hyperstack account is required.** Sign up free at https://thehyperstack.com. Each credential uses Hyperstack credits.
+- **A Hyperstack account is required.** Hyperstack is an external credential service. Its free plan covers up to 20 recipients; larger volumes need a Hyperstack plan. Without an account the plugin issues nothing: the settings page and the course page say the site is not connected.
 - Moodle cron must run: course completion is calculated by a scheduled task.
 - Course completion tracking and completion conditions set in the course.
 
@@ -57,17 +57,13 @@ From `docs/screenshots/`, in this order:
 
 ## For the reviewers
 
-The plugin needs a Hyperstack account. Demo account for review:
+The plugin needs a Hyperstack account. A free account is enough to test (the free plan covers 20 recipients):
 
-- API key: *(create in the demo organization: Settings → Developers)*
-- The demo organization has two credential groups and credits.
-
-To test:
-
-1. Install the plugin, go to Site administration → Plugins → Local plugins → Hyperstack Credentials, paste the API key, save, and click "test the connection".
-2. Create a course with completion tracking on and the "Manual self completion" condition. Enrol a teacher and a student.
-3. As the teacher, open More → Hyperstack credentials, select a group, save.
-4. As the student, mark the course complete (Self completion block). Run cron.
-5. As the teacher, open "See who received a credential": the student shows as Issued with a link.
+1. Sign up at https://thehyperstack.com, create a credential group (Credential Groups → New, pick any design), then create an API key in Settings → Developers. If you prefer a ready account, write to hello@thehyperstack.com.
+2. Install the plugin, go to Site administration → Plugins → Local plugins → Hyperstack Credentials, paste the API key, save, and click "test the connection".
+3. Create a course with completion tracking on and the "Manual self completion" condition. Enrol a teacher and a student.
+4. As the teacher, open More → Hyperstack credentials, select a group, save.
+5. As the student, mark the course complete (Self completion block). Run cron.
+6. As the teacher, open "See who received a credential": the student shows as Issued with a link.
 
 Tests: PHPUnit (32 tests) and Behat (3 scenarios) pass on Moodle 4.5 and 5.3, PostgreSQL and MariaDB (`.github/workflows/ci.yml`).

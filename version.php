@@ -28,5 +28,5 @@ $plugin->component = 'local_hyperstack';
 $plugin->version = 2026102405;
 $plugin->requires = 2024100700;
 $plugin->supported = [405, 503];
-$plugin->maturity = MATURITY_ALPHA;
+$plugin->maturity = MATURITY_RC;
 $plugin->release = '1.0.0';

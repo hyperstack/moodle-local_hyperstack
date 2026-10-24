@@ -155,7 +155,7 @@ if ($mapped) {
         'post'
     );
     $button->disabled = $completed == 0;
-    echo $OUTPUT->render($button);
+    echo html_writer::div($OUTPUT->render($button), 'mb-4');
 }
 
 echo $OUTPUT->heading(get_string('report:title', 'local_hyperstack'), 3);

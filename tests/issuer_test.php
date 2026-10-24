@@ -227,6 +227,14 @@ final class issuer_test extends \advanced_testcase {
         $this->assertSame(issuer::QUEUED, $this->row()->status);
         $this->assertCount(1, \core\task\manager::get_adhoc_tasks(issue_credential::class));
 
+        // A retrying row's task waiting for its delay is brought forward, not queued twice.
+        $DB->set_field('local_hyperstack_issue', 'status', issuer::RETRYING, ['id' => $row->id]);
+        $DB->set_field('task_adhoc', 'nextruntime', time() + 3600);
+        $this->assertTrue(issuer::retry($row->id, $this->course->id));
+        $tasks = \core\task\manager::get_adhoc_tasks(issue_credential::class);
+        $this->assertCount(1, $tasks);
+        $this->assertLessThanOrEqual(time(), reset($tasks)->get_next_run_time());
+
         // Only failed, retrying or skipped rows can be retried.
         $this->assertFalse(issuer::retry($row->id, $this->course->id));
     }

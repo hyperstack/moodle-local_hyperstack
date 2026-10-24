@@ -112,7 +112,11 @@ class issuer {
             return false;
         }
         self::save($row, self::QUEUED, null);
-        self::queue_task($row->id);
+        // A retrying row still has its task queued, waiting for its delay: run it now instead.
+        $task = new task\issue_credential();
+        $task->set_custom_data(['issueid' => (int) $row->id]);
+        $task->set_next_run_time(time());
+        \core\task\manager::reschedule_or_queue_adhoc_task($task);
         return true;
     }
 
@@ -151,7 +155,7 @@ class issuer {
             $answer = (new client())->issue($row->groupkey, fullname($user), $user->email);
         } catch (api_exception $e) {
             if ($e->apicode === 'credential_exists') {
-                self::save($row, self::EXISTS, $e->get_reason());
+                self::save($row, self::EXISTS, get_string('exists', 'local_hyperstack'));
             } else if ($e->retry && !$lastattempt) {
                 self::save($row, self::RETRYING, $e->get_reason());
                 throw $e;

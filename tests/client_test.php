@@ -22,6 +22,7 @@ use GuzzleHttp\Psr7\Response;
 use local_hyperstack\api\api_exception;
 use local_hyperstack\api\client;
 
+#[\PHPUnit\Framework\Attributes\CoversClass(client::class)]
 /**
  * Tests for the Hyperstack API client.
  *
@@ -30,7 +31,6 @@ use local_hyperstack\api\client;
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers     \local_hyperstack\api\client
  */
-#[\PHPUnit\Framework\Attributes\CoversClass(client::class)]
 final class client_test extends \advanced_testcase {
     /**
      * A JSON answer.

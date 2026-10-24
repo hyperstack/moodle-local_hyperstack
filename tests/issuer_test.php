@@ -25,6 +25,9 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/completionlib.php');
 
+#[\PHPUnit\Framework\Attributes\CoversClass(issuer::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(observer::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(issue_credential::class)]
 /**
  * Tests for issuing: the completion observer, the issue rows and the background task.
  *
@@ -35,9 +38,6 @@ require_once($CFG->libdir . '/completionlib.php');
  * @covers     \local_hyperstack\observer
  * @covers     \local_hyperstack\task\issue_credential
  */
-#[\PHPUnit\Framework\Attributes\CoversClass(issuer::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(observer::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(issue_credential::class)]
 final class issuer_test extends \advanced_testcase {
     /** @var \stdClass */
     private $course;

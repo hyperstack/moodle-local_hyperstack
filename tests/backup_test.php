@@ -22,6 +22,8 @@ global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 
+#[\PHPUnit\Framework\Attributes\CoversClass(\backup_local_hyperstack_plugin::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\restore_local_hyperstack_plugin::class)]
 /**
  * Tests that a course backup carries its credential groups and not its issue rows.
  *
@@ -31,8 +33,6 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  * @covers     \backup_local_hyperstack_plugin
  * @covers     \restore_local_hyperstack_plugin
  */
-#[\PHPUnit\Framework\Attributes\CoversClass(\backup_local_hyperstack_plugin::class)]
-#[\PHPUnit\Framework\Attributes\CoversClass(\restore_local_hyperstack_plugin::class)]
 final class backup_test extends \advanced_testcase {
     public function test_a_restored_course_keeps_its_credential_groups(): void {
         global $DB, $USER;

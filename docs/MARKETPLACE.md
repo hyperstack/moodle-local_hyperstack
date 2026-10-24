@@ -11,7 +11,7 @@ Text and answers for marketplace.moodle.com → Submit a plugin → **Free**. No
 - **Moodle versions:** 4.5, 5.0, 5.1, 5.2, 5.3
 - **Source:** https://github.com/hyperstack/moodle-local_hyperstack
 - **Issues:** https://github.com/hyperstack/moodle-local_hyperstack/issues
-- **Documentation:** https://docs.thehyperstack.com/integrations/moodle-plugin
+- **Documentation:** https://thehyperstack.com/docs/integrations/moodle-plugin
 - **Website:** https://thehyperstack.com
 - **Licence:** GNU GPL v3 or later
 

@@ -65,7 +65,7 @@ To issue a credential, the plugin sends the learner's **full name** and **email 
 
 - Questions: [hello@thehyperstack.com](mailto:hello@thehyperstack.com)
 - Bugs and requests: [GitHub issues](https://github.com/hyperstack/moodle-local_hyperstack/issues)
-- Guide: [docs.thehyperstack.com](https://docs.thehyperstack.com/integrations/moodle-plugin)
+- Guide: [thehyperstack.com/docs](https://thehyperstack.com/docs/integrations/moodle-plugin)
 
 ## Development
 

@@ -45,6 +45,9 @@ class client {
     /** @var string */
     private string $apiurl;
 
+    /** @var bool True when a key is saved but cannot be decrypted. */
+    private bool $unreadable = false;
+
     /**
      * Constructor. Without arguments, the key and address come from the plugin settings.
      *
@@ -53,6 +56,7 @@ class client {
      */
     public function __construct(?string $apikey = null, ?string $apiurl = null) {
         $this->apikey = trim($apikey ?? self::saved_key());
+        $this->unreadable = $apikey === null && $this->apikey === '' && self::is_configured();
         $apiurl = trim($apiurl ?? (string) get_config('local_hyperstack', 'apiurl'));
         $this->apiurl = rtrim($apiurl !== '' ? $apiurl : self::DEFAULT_URL, '/');
     }
@@ -63,12 +67,12 @@ class client {
      * @return bool
      */
     public static function is_configured(): bool {
-        return self::saved_key() !== '';
+        return trim((string) get_config('local_hyperstack', 'apikey')) !== '';
     }
 
     /**
-     * The API key from the plugin settings. The setting is stored encrypted with the site's key;
-     * one that cannot be decrypted (the site's key file changed) counts as no key.
+     * The API key from the plugin settings, decrypted: the setting is stored encrypted with the site's key.
+     * Empty when no key is saved, or when it cannot be decrypted (the site's key file changed or cannot be read).
      *
      * @return string
      */
@@ -140,6 +144,9 @@ class client {
      * @return array
      */
     private function request(string $method, string $path, ?array $body = null): array {
+        if ($this->unreadable) {
+            throw new api_exception(0, 'unreadable_key', get_string('error:unreadablekey', 'local_hyperstack'), false);
+        }
         if ($this->apikey === '') {
             throw new api_exception(0, 'not_configured', get_string('error:notconfigured', 'local_hyperstack'), false);
         }
@@ -160,7 +167,7 @@ class client {
         try {
             $response = \core\di::get(http_client::class)->request($method, $this->apiurl . $path, $options);
         } catch (GuzzleException $e) {
-            throw new api_exception(0, 'network', get_string('error:network', 'local_hyperstack', $e->getMessage()), true);
+            throw new api_exception(0, 'network', get_string('error:network', 'local_hyperstack'), true, $e->getMessage());
         }
 
         $code = $response->getStatusCode();

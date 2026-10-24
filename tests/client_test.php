@@ -71,6 +71,23 @@ final class client_test extends \advanced_testcase {
         $this->assertSame('Bearer secret', $history[0]['request']->getHeaderLine('Authorization'));
     }
 
+    public function test_a_key_that_cannot_be_decrypted_is_reported_and_not_sent(): void {
+        $this->resetAfterTest();
+        set_config('apikey', 'sodium:bm90IHJlYWxseSBlbmNyeXB0ZWQgYXQgYWxs', 'local_hyperstack');
+        $history = [];
+        $this->get_mocked_http_client($history);
+
+        $this->assertTrue(client::is_configured());
+        try {
+            (new client())->info();
+            $this->fail('No exception');
+        } catch (api_exception $e) {
+            $this->assertSame('unreadable_key', $e->apicode);
+            $this->assertFalse($e->retry);
+        }
+        $this->assertCount(0, $history);
+    }
+
     public function test_info_without_an_account_is_an_invalid_key(): void {
         $this->resetAfterTest();
         $mock = $this->get_mocked_http_client()['mock'];

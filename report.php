@@ -139,7 +139,8 @@ foreach ($rows as $row) {
         );
     }
 
-    $table->data[] = [$learner, format_string($row->grouptitle), $status, $details, userdate($row->timemodified), $actions];
+    $updated = userdate($row->timemodified, get_string('strftimedatetimeshort', 'langconfig'));
+    $table->data[] = [$learner, format_string($row->grouptitle), $status, $details, $updated, $actions];
 }
 
 echo html_writer::table($table);

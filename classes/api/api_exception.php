@@ -40,12 +40,13 @@ class api_exception extends \moodle_exception {
      * @param string $apicode Error code
      * @param string $message The reason, as Hyperstack gave it
      * @param bool $retry True when trying again later can work
+     * @param string|null $debuginfo Technical detail for the task log, not shown to teachers
      */
-    public function __construct(int $httpcode, string $apicode, string $message, bool $retry) {
+    public function __construct(int $httpcode, string $apicode, string $message, bool $retry, ?string $debuginfo = null) {
         $this->httpcode = $httpcode;
         $this->apicode = $apicode;
         $this->retry = $retry;
-        parent::__construct('apierror', 'local_hyperstack', '', $message);
+        parent::__construct('apierror', 'local_hyperstack', '', $message, $debuginfo);
     }
 
     /**
